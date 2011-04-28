@@ -3,10 +3,11 @@ Introduction
 ------------
 
 This is a logback (http://logback.qos.ch/) appender for writing "SAML F-TICKS"
-to syslog based on Shibboleth Audit Logs. This is an "uggly hack" (TM) that 
-transforms the Audit Log format into the F-TICKS format. The purpose of this 
-appender is to produce a privacy-preserving stream of audit data which can be
-used to produce federation-wide usage statistics.
+to syslog based on Shibboleth (http://shibboleth.internet2.edu) Audit Logs. 
+
+This is an "uggly hack" (TM) that transforms the Audit Log format into the 
+F-TICKS format. The purpose of this appender is to produce a privacy-preserving 
+stream of audit data which can be used to produce federation-wide usage statistics.
 
 
 Log format
