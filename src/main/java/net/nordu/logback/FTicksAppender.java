@@ -33,13 +33,31 @@ public class FTicksAppender extends AppenderBase<LoggingEvent> {
 	private File keyFile;
 	private String key;
 	private String syslogHost;
-	SyslogOutputStream sw;
-	int port = SyslogConstants.SYSLOG_PORT;
-	int facility;
-	long lastTimestamp = -1;
-	String localHostName;
-	String timesmapStr = null;
-	SimpleDateFormat simpleFormat;
+	private SyslogOutputStream sw;
+	private int port = SyslogConstants.SYSLOG_PORT;
+	private int facility;
+	private long lastTimestamp = -1;
+	private String localHostName;
+	private String timesmapStr = null;
+	private SimpleDateFormat simpleFormat;
+	private String federationIdentifier;
+	private String version;
+	
+	public String getFederationIdentifier() {
+		return federationIdentifier;
+	}
+	
+	public String getVersion() {
+		return version;
+	}
+	
+	public void setFederationIdentifier(String federationIdentifier) {
+		this.federationIdentifier = federationIdentifier;
+	}
+	
+	public void setVersion(String version) {
+		this.version = version;
+	}
 
 	/**
 	 * Returns the value of the <b>SyslogHost</b> option.
@@ -112,12 +130,14 @@ public class FTicksAppender extends AppenderBase<LoggingEvent> {
 	}
 
 	private String fticks(String msg) {
-		//System.err.println("fticks from: "+msg);
+		//System.err.println("f-ticks from: "+msg);
 		StringBuffer buf = new StringBuffer();
 		String fields[] = msg.split("\\|");
 		String principalName = fields[8];
 
-		buf.append("F-TICKS/swamid/1.0");
+		buf.append("F-TICKS");
+		buf.append("/").append(getFederationIdentifier());
+		buf.append("/").append(getVersion());
 		buf.append("#TS=").append(fields[0]);
 		buf.append("#RP=").append(fields[3]);
 		buf.append("#AP=").append(fields[5]);

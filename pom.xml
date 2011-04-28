@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.nordu</groupId>
-  <artifactId>ndn-fticks-layout</artifactId>
+  <artifactId>ndn-shib-fticks</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>ndn-fticks-layout</name>
+  <name>ndn-shib-fticks</name>
   <scm>
-  	<connection>scm:git:git://git.nordu.net/ndn-fticks-layout.git</connection>
-  	<developerConnection>scm:git:git@git.nordu.net:ndn-fticks-layout.git</developerConnection>
+  	<connection>scm:git:git://git.nordu.net/ndn-shib-fticks.git</connection>
+  	<developerConnection>scm:git:git@git.nordu.net:ndn-shib-fticks.git</developerConnection>
   </scm>
   <organization>
   	<name>NORDUNet A/S</name>
@@ -57,7 +57,7 @@
     </repository>
     <site>
       <id>website</id>
-      <url>scpexe://code.mnt.se/var/www/code.mnt.se/site/ndn-fticks-layout</url>
+      <url>scpexe://code.mnt.se/var/www/code.mnt.se/site/ndn-shib-fticks</url>
     </site>
   </distributionManagement>
 </project>
