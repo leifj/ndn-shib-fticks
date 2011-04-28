@@ -143,6 +143,7 @@ public class FTicksAppender extends AppenderBase<LoggingEvent> {
 		buf.append("#AP=").append(fields[5]);
 		buf.append("#PN=").append(anonymize(principalName));
 		buf.append("#AM=").append(fields[9]);
+		buf.append("#");
 
 		return buf.toString();
 	}

@@ -22,7 +22,7 @@ Log format
 The F-TICKS format implemented by this log appender is a generalization of the
 eduroam F-TICKS format:
 
-'F-TICKS/' federationIdentifier '/' version ('#' attribute '=' value )+
+'F-TICKS/' federationIdentifier '/' version *('#' attribute '=' value ) '#'
 
 In eduroam federationIdentifier is 'eduroam' and version is '1.0'. This 
 implementation allows these values to be defined. The eduroam pattern SHOULD 
