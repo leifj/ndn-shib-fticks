@@ -1,4 +1,10 @@
 
+
+Disclaimer
+----------
+
+This is alpha software. It may break stuff - use at your own risk.
+
 Introduction
 ------------
 
@@ -75,7 +81,20 @@ to
 
 This assumes that you haven't changed logging.xml from the default.
 
-3) Add the jar-file to the lib directory and re-run the install.sh script to
-build and deploy the shibboleth war-file. You may need to restart your entire
-application container (tomcat) for this to take effekt. If everything works
-you should start seeing F-TICKS lines on your syslog server.
+3) Build:
+
+# git clone git://github.com/leifj/ndn-shib-fticks.git
+# cd ndn-shib-fticks
+# mvn 
+... build finishes ...
+
+The target directory should contain a jar-file. This is what you need for
+the next step.
+
+4) Copy the jar-file to shibboleth-identity-provider-2.2.x/lib and re-run the 
+install.sh script to build and deploy the shibboleth war-file. You may need to
+restart your entire application container (tomcat) for this to take effekt. 
+
+If everything works you should start seeing F-TICKS lines on your syslog server!
+
+Comments are most welcome to leifj at sunet.se
