@@ -133,16 +133,23 @@ public class FTicksAppender extends AppenderBase<LoggingEvent> {
 		//System.err.println("f-ticks from: "+msg);
 		StringBuffer buf = new StringBuffer();
 		String fields[] = msg.split("\\|");
-		String principalName = fields[8];
 
 		buf.append("F-TICKS");
 		buf.append("/").append(getFederationIdentifier());
 		buf.append("/").append(getVersion());
 		buf.append("#TS=").append(fields[0]);
-		buf.append("#RP=").append(fields[3]);
-		buf.append("#AP=").append(fields[5]);
-		buf.append("#PN=").append(anonymize(principalName));
-		buf.append("#AM=").append(fields[9]);
+                if (fields.length > 3) {
+                   buf.append("#RP=").append(fields[3]);
+                }
+                if (fields.length > 5) {
+		   buf.append("#AP=").append(fields[5]);
+                }
+                if (fields.length > 8) {
+		   buf.append("#PN=").append(anonymize(fields[8]));
+                }
+                if (fields.length > 9) { 
+		   buf.append("#AM=").append(fields[9]);
+                }
 		buf.append("#");
 
 		return buf.toString();
