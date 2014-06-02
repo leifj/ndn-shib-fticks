@@ -204,11 +204,11 @@ public class FTicksAppender extends AppenderBase<LoggingEvent> {
 	}
 
         private boolean isBlacklisted(LoggingEvent eventObject) {
-                if (this.blacklisted == null) {
+                if (this.blacklisted == null || this.blacklisted.length == 0) {
 			return false;
                 }
 		String fields[] = eventObject.getMessage().split("\\|");
-		if (fields.length <= 8) {
+		if (fields.length < 9) {
 			return false;
                 }
 		String uid = fields[8];
@@ -216,7 +216,7 @@ public class FTicksAppender extends AppenderBase<LoggingEvent> {
 			return false;
                 }
                 for (int i = 0; i < this.blacklisted.length; i++) {
-			if (blacklisted[i] != null && uid.matches(this.blacklisted[i])) {
+			if (this.blacklisted[i] != null && uid.matches(this.blacklisted[i])) {
 				return true;
 			}
 		}
