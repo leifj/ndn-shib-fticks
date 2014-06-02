@@ -42,6 +42,17 @@ public class FTicksAppender extends AppenderBase<LoggingEvent> {
 	private SimpleDateFormat simpleFormat;
 	private String federationIdentifier;
 	private String version;
+        private String blacklist = null;
+        private String[] blacklisted = null;
+
+        public String getBlacklist() {
+		return blacklist;
+        }
+
+        public void setBlacklist(String blacklist) {
+                this.blacklist = blacklist;
+                this.blacklisted = blacklist.split("\\s*,\\s*");
+        }
 	
 	public String getFederationIdentifier() {
 		return federationIdentifier;
@@ -192,10 +203,34 @@ public class FTicksAppender extends AppenderBase<LoggingEvent> {
 		super.stop();
 	}
 
+        private boolean isBlacklisted(LoggingEvent eventObject) {
+                if (this.blacklisted == null) {
+			return false;
+                }
+		String fields[] = eventObject.getMessage().split("\\|");
+		if (fields.length <= 8) {
+			return false;
+                }
+		String uid = fields[8];
+                if (uid == null) {
+			return false;
+                }
+                for (int i = 0; i < this.blacklisted.length; i++) {
+			if (blacklisted[i] != null && uid.matches(this.blacklisted[i])) {
+				return true;
+			}
+		}
+                return false;
+        }
+
 	@Override
 	protected void append(LoggingEvent eventObject) {
 		if (!isStarted()) {
 			return;
+		}
+
+		if (isBlacklisted(eventObject)) {
+			return; 
 		}
 
 		try {
