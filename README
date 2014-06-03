@@ -47,21 +47,26 @@ Configuration is done in logging.xml:
    <federationIdentifier>swamid</federationIdentifier>
    <version>1.0</version>
    <keyFile>/opt/shibboleth-idp/conf/fticks-key.txt</keyFile>
-   <blacklist>^test.*$,^monitor.*$</blacklist>
+   <blacklist>^test-.*$$|^monitor$$</blacklist>
 </appender>
 
 Change the keyFile to point to where you want to store your random key for
 protecting local principal names. 
 
-The blacklist is a , separated list of regular expressions. Any log event 
-where the local username matches any of these regexps are excluded from the
-log. Typically this is used to disable f-ticks for test or monitor accounts.
-Note that Java regexps imply *full* match so be sure to provide ^ and $ at 
-the beginning and end of the string or your regexps probably won't match.
-
 NOTE!!!! 
 
    Do not loose this file once you've started to generate logs 
+
+The blacklist is a regular expression, referer to the java documentation on
+regular expressions:
+
+  http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html#sum
+  
+Any log event where the local username matches this regexp are excluded from
+the log. Typically this is used to disable f-ticks for test or monitor
+accounts. Note that Java regexps imply *full* match so be sure to provide ^ and
+$ at the beginning and end of the string or your regexps probably won't match.
+$ must be doubled as $$ in logging.xml.
 
 NOTE!!!!
 

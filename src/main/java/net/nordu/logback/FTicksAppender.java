@@ -43,7 +43,6 @@ public class FTicksAppender extends AppenderBase<LoggingEvent> {
 	private String federationIdentifier;
 	private String version;
         private String blacklist = null;
-        private String[] blacklisted = null;
 
         public String getBlacklist() {
 		return blacklist;
@@ -51,7 +50,6 @@ public class FTicksAppender extends AppenderBase<LoggingEvent> {
 
         public void setBlacklist(String blacklist) {
                 this.blacklist = blacklist;
-                this.blacklisted = blacklist.split("\\s*,\\s*");
         }
 	
 	public String getFederationIdentifier() {
@@ -204,7 +202,7 @@ public class FTicksAppender extends AppenderBase<LoggingEvent> {
 	}
 
         private boolean isBlacklisted(LoggingEvent eventObject) {
-                if (this.blacklisted == null || this.blacklisted.length == 0) {
+                if (this.blacklist == null) {
 			return false;
                 }
 		String fields[] = eventObject.getMessage().split("\\|");
@@ -215,10 +213,8 @@ public class FTicksAppender extends AppenderBase<LoggingEvent> {
                 if (uid == null) {
 			return false;
                 }
-                for (int i = 0; i < this.blacklisted.length; i++) {
-			if (this.blacklisted[i] != null && uid.matches(this.blacklisted[i])) {
-				return true;
-			}
+		if (uid.matches(this.blacklist)) {
+			return true;
 		}
                 return false;
         }
